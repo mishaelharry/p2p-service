@@ -27,11 +27,11 @@ public class WalletService {
         return new BaseResponse<>(false, "Wallet detail not found.", null);
     }
 
-    public BaseResponse fund(User user, BigDecimal amount){
-        BaseResponse validateAmount = validateAmount(amount);
+    public BaseResponse<Wallet> fund(User user, BigDecimal amount){
+        /*BaseResponse validateAmount = validateAmount(amount);
         if (!validateAmount.isStatus()){
             return validateAmount;
-        }
+        }*/
 
         if (!userRepository.existsById(user.getId())){
             return new BaseResponse<>(false, "User not found.", null);
@@ -90,7 +90,7 @@ public class WalletService {
         return new BaseResponse<>(true, "Transfer was successful", null);
     }
 
-    public BaseResponse validateAmount(BigDecimal amount){
+    public BaseResponse<Wallet> validateAmount(BigDecimal amount){
         if (amount.compareTo(BigDecimal.ZERO) == 0){
             return new BaseResponse<>(false, "Amount must be greater than zero.", null);
         }
